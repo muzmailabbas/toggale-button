@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  margin: 0;
+  height: 100vh;
+  background:
+    radial-gradient(at 100% 0, #fffa, #fff0 50%),
+    radial-gradient(at 0% 100%, #0002, #0000 50%),
+    #c4c1c3;
+}
+
+.rebound {
+  --color: #c4c1c3;
+  --background-off: #767576;
+  --background-on: #b3e82a ;
+  --time: 0.3s;
+  appearance: none;
+  position: relative;
+/*   width: 2em; */
+  width: 11em;
+  aspect-ratio: 11 / 3;
+  border-radius: 100em;
+  background-color: #76757a;
+  background-image:
+    linear-gradient(#0001, #0000),
+    linear-gradient(90deg, var(--background-on) 50%, var(--background-off) 0)
+    ;
+  box-shadow:
+    inset 0 0.05em 0.25em #0008,
+    inset 0 0.5em 0.5em #0004,
+    0 -0.1em 0.15em 0.075em #0006,
+    0 0.1em 0.15em 0.075em #fffc
+    ;
+  
+  &::before {
+    content: "";
+    top: 0;
+    left: 0.5%;
+    width: 60%;
+    height: 100%;
+    position: absolute;
+    border-radius: 100em;
+    transition: left var(--time) linear;
+    padding: 0.875em 2em;
+    box-sizing: border-box;
+    background:
+      radial-gradient(circle at 50% 50%, #fff7 24%, #0000 0) 52.5% -10% / 20% 20% repeat-x content-box,
+      radial-gradient(circle at 50% 50%, #0005 24%, #0000 0) 52.5% 110% / 20% 20% repeat-x content-box,
+      linear-gradient(90deg, #0004, #0000 22.5% 35%, #0003, #0000 50%) 34% 50% / 20% 40% content-box,
+      var(--color);
+    box-shadow:
+      inset 0 0.15em 0.1em -0.1em #fff,
+      inset 0 -0.15em 0.1em -0.1em #000,
+      0 0.2em 0.5em #0004,
+      0 0.1em 0.25em 0.05em #0004;
+  }
+  
+  &:checked {
+    &::before {
+      left: 39.5%;
+    }
+  }
+  
+  &[disabled] {
+    opacity: 0.25;
+  }
+}
+
+@media print {
+  .rebound {
+    &, &::before, &::after {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+  }
+}
+
+@media (prefers-reduced-motion) {
+  .rebound, .rebound::before, .rebound::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+</style>
+<body>
+    <input type="checkbox" role="switch" class="rebound" />
+</body>
+</html>
